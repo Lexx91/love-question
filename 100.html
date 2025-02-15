@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Ти мене кохаєш?</title>
+    <style>
+        body {
+            background-color: yellow;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            position: relative;
+        }
+        button {
+            font-size: 1.5rem;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 10px;
+            position: relative;
+        }
+        .yes {
+            background-color: green;
+            color: white;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .no {
+            background-color: red;
+            color: white;
+            position: absolute;
+            transition: top 0.3s ease-out, left 0.3s ease-out;
+        }
+        .hidden {
+            font-size: 1.8rem;
+            margin-top: 20px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ти мене кохаєш? ❤️</h1>
+    <div class="buttons">
+        <button class="yes" id="yesButton">Так</button>
+        <button class="no" id="noButton">Ні</button>
+    </div>
+    <p id="message" class="hidden">Я так і знав 🤗</p>
+
+    <script>
+        document.getElementById("yesButton").addEventListener("click", function() {
+            let message = document.getElementById("message");
+            message.classList.add("visible"); // Показуємо текст
+        });
+
+        let noButton = document.getElementById("noButton");
+
+        noButton.addEventListener("mouseover", moveButton);
+        noButton.addEventListener("touchstart", moveButton); // Для iPhone
+
+        function moveButton() {
+            let maxX = window.innerWidth - noButton.offsetWidth - 30;
+            let maxY = window.innerHeight - noButton.offsetHeight - 30;
+            let newX = Math.random() * maxX;
+            let newY = Math.random() * maxY;
+
+            noButton.style.left = `${newX}px`;
+            noButton.style.top = `${newY}px`;
+        }
+    </script>
+</body>
+</html>
