@@ -16,16 +16,14 @@
             font-family: Arial, sans-serif;
             text-align: center;
             overflow: hidden;
-            position: relative;
         }
         h1 {
             font-size: 2rem;
+            margin-bottom: 20px;
         }
         .buttons {
-            margin-top: 20px;
             display: flex;
             gap: 20px;
-            position: relative;
         }
         button {
             font-size: 1.5rem;
@@ -44,8 +42,7 @@
         .no {
             background-color: red;
             color: white;
-            position: absolute;
-            transition: top 0.3s ease-out, left 0.3s ease-out;
+            position: relative; /* Початково НЕ absolute */
         }
         .hidden {
             font-size: 1.8rem;
@@ -70,15 +67,16 @@
     <script>
         document.getElementById("yesButton").addEventListener("click", function() {
             let message = document.getElementById("message");
-            message.classList.add("visible"); // Показуємо текст
+            message.classList.add("visible");
         });
 
         let noButton = document.getElementById("noButton");
 
         noButton.addEventListener("mouseover", moveButton);
-        noButton.addEventListener("touchstart", moveButton); // Для iPhone
+        noButton.addEventListener("touchstart", moveButton);
 
         function moveButton() {
+            noButton.style.position = "absolute"; // Тільки після першого руху!
             let maxX = window.innerWidth - noButton.offsetWidth - 30;
             let maxY = window.innerHeight - noButton.offsetHeight - 30;
             let newX = Math.random() * maxX;
