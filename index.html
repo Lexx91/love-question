@@ -20,9 +20,9 @@
         }
         h1 {
             font-size: 2rem;
+            margin-bottom: 20px;
         }
         .buttons {
-            margin-top: 20px;
             display: flex;
             gap: 20px;
             position: relative;
@@ -34,7 +34,6 @@
             cursor: pointer;
             transition: 0.3s;
             border-radius: 10px;
-            position: relative;
         }
         .yes {
             background-color: green;
@@ -45,7 +44,7 @@
             background-color: red;
             color: white;
             position: absolute;
-            transition: top 0.3s ease-out, left 0.3s ease-out;
+            left: 120px; /* Початкове положення, щоб не накладалась */
         }
         .hidden {
             font-size: 1.8rem;
@@ -70,7 +69,7 @@
     <script>
         document.getElementById("yesButton").addEventListener("click", function() {
             let message = document.getElementById("message");
-            message.classList.add("visible"); // Показуємо текст
+            message.classList.add("visible");
         });
 
         let noButton = document.getElementById("noButton");
@@ -79,10 +78,19 @@
         noButton.addEventListener("touchstart", moveButton); // Для iPhone
 
         function moveButton() {
-            let maxX = window.innerWidth - noButton.offsetWidth - 30;
-            let maxY = window.innerHeight - noButton.offsetHeight - 30;
+            noButton.style.position = "absolute"; // Активуємо рух
+
+            let maxX = window.innerWidth - noButton.offsetWidth - 20;
+            let maxY = window.innerHeight - noButton.offsetHeight - 20;
+
             let newX = Math.random() * maxX;
             let newY = Math.random() * maxY;
+
+            // Обмежуємо рух кнопки, щоб не вилітала за межі екрана
+            if (newX < 10) newX = 10;
+            if (newY < 10) newY = 10;
+            if (newX > maxX - 10) newX = maxX - 10;
+            if (newY > maxY - 10) newY = maxY - 10;
 
             noButton.style.left = `${newX}px`;
             noButton.style.top = `${newY}px`;
